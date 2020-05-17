@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # extra
     'tienda.apps.TiendaConfig',
+    'cesta.apps.CestaConfig',
 ]
 
+# lógica de intercambio de información entre aplicaciones (interlogical)
+# es un software que asiste a una aplicación para interactuar o comunicarse con otras aplicaciones, o paquetes de programas, redes, hardware o sistemas operativos.
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -49,7 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+] # sesiones de middleware hacen las sesiones diponibles en objeto "request"
+# las podemos acceder usando request.sessions y usar como un diccionaro: request.sessions[`foo`] = `bar` 
 
 ROOT_URLCONF = 'principal.urls'
 
@@ -123,3 +127,5 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'   # es una URL principal que sirve archivos guardados en 'media' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') # es una URL local donde los archivos se ubican
+
+CESTA_SESION_ID = 'cesta' # es la llave (key) para guardar la cesta en la sesión de usuario

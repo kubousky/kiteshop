@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Categoria, Producto
-# from cart.forms import CartAddProductForm
+from cesta.forms import AnadirProductoCestaFormulario
 
 
 def producto_lista(request, categoria_slug=None):
@@ -22,10 +22,9 @@ def producto_detalles(request, id, slug): # podemos sacar de la bbdd la instanci
                                 id=id,
                                 slug=slug,
                                 disponible=True)
-    # cart_product_form = CartAddProductForm()
+    cesta_producto_formulario = AnadirProductoCestaFormulario()
     return render(request,
                 'tienda/producto/detalles.html',
-                {'producto': producto})
+                {'producto': producto,
+                'cesta_producto_formulario': cesta_producto_formulario})
 
-# ,
-# 'cart_product_form': cart_product_form

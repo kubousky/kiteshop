@@ -1,0 +1,22 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ producto.nombre }}
+{% endblock %}
+
+{% block content %}
+<div class="producto-detalles">
+    <img src="{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+    <!-- el metodo get_absolute_url() saca todos productos disponibles que pertenecen a la dada categoria -->
+    <h1>{{ producto.nombre }}</h1>
+    <h2><a href="{{ producto.categoria.get_absolute_url }}">{{ producto.categoria }}</a></h2> 
+    <p class="precio">${{ producto.precio }}</p>
+    <form action="{% url "cesta:cesta_anadir" producto.id %}" method="post">
+        {{ cesta_producto_formulario }}
+        {% csrf_token %}
+        <input type="submit" value="Añadir en la cesta">
+    </form>
+    {{ producto.descripcion|linebreaks }}
+</div>
+{% endblock %}

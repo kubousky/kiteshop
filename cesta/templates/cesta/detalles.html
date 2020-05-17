@@ -1,0 +1,56 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}
+  Tu cesta
+{% endblock %}
+
+{% block content %}
+  <h1>Tu cesta</h1>
+  <table class="cesta">
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Eliminar</th>
+        <th class="text-right">Precio unitario</th>
+        <th class="text-right">Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for articulo in cesta %}
+        {% with producto=articulo.producto %}
+          <tr>
+            <td>
+              <a href="{{ producto.get_absolute_url }}">
+                <img src="{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+              </a>
+            </td>
+            <td>{{ producto.nombre }}</td>
+            <td>
+              <form action="{% url "cesta:cesta_anadir" producto.id %}" method="post">
+                {{ articulo.actualizar_cantidad_formulario.cantidad }}
+                {{ articulo.actualizar_cantidad_formulario.actualizacion }}
+                <input type="submit" value="Actualizar">
+                {% csrf_token %}
+              </form>
+            </td>
+            <td><a href="{% url "cesta:cesta_eliminar" producto.id %}">Eliminar</a></td>
+            <td class="num">{{ articulo.precio }}€</td>
+            <td class="num">{{ articulo.precio_total }}€</td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      <tr class="total">
+        <td>Total</td>
+        <td colspan="4"></td>
+        <td class="num">{{ cesta.calcula_precio_total }}€</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-right">
+    <a href="{% url "tienda:producto_lista" %}" class="button light">Continua comprando</a>
+    <a href="#" class="button">Pago</a>
+  </p>
+{% endblock %}

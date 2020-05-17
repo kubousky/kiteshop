@@ -197,27 +197,27 @@ ul.errorlist {
     margin-bottom:8px;
 }
 
-.product-detail {
+.producto-detalles {
     text-align:justify;
 }
 
-.product-detail .price {
+.producto-detalles .precio {
     color:#333;
     font-size:28px;
     font-weight:bold;
 }
 
-.product-detail img {
+.producto-detalles img {
     width:40%;
     float:left;
     padding:0 20px 20px 0;
 }
 
-.product-detail h1 {
+.producto-detalles h1 {
     margin-bottom:0;
 }
 
-.product-detail h2 {
+.producto-detalles h2 {
     margin-top:10px;
 }
 
