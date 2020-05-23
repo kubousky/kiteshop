@@ -11,7 +11,7 @@
     <!-- el metodo get_absolute_url() saca todos productos disponibles que pertenecen a la dada categoria -->
     <h1>{{ producto.nombre }}</h1>
     <h2><a href="{{ producto.categoria.get_absolute_url }}">{{ producto.categoria }}</a></h2> 
-    <p class="precio">${{ producto.precio }}</p>
+    <p class="precio">{{ producto.precio }}€</p>
     <form action="{% url "cesta:cesta_anadir" producto.id %}" method="post">
         {{ cesta_producto_formulario }}
         {% csrf_token %}

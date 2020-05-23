@@ -1,0 +1,31 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}
+  Pago
+{% endblock %}
+
+{% block content %}
+  <h1>Pago</h1>
+
+  <div class="pedido-info">
+    <h3>Tu pedido</h3>
+    <ul>
+      {% for articulo in cesta %}
+        <li>
+          {{ articulo.cantidad }}x {{ articulo.producto.nombre }}
+          <span>{{ articulo.precio_total }}€</span>  <!-- __iter__ method donde se añade al diccionario los keys: "precio" y "precio_total"-->
+        </li>
+      {% endfor %}
+    </ul>
+    <p>Total: {{ cesta.calcula_precio_total }}€</p>
+  </div>
+
+
+  <form action="." method="post" class="formulario-pedido">
+    {{ formulario.as_p }}  <!-- as_p  - en html aparecerá entre los tags <p>   -->
+    <p><input type="submit" value="Realiza el pedido"></p>
+    {% csrf_token %}
+  </form>
+
+{% endblock %}

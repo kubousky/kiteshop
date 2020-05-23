@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # extra
     'tienda.apps.TiendaConfig',
     'cesta.apps.CestaConfig',
+    'pedidos.apps.PedidosConfig',
 ]
 
 # lógica de intercambio de información entre aplicaciones (interlogical)
