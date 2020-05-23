@@ -12,8 +12,18 @@
 </div>
 <div id="subheader">
     <div class="cesta">
-
-            Tu cesta está vacía.
+        <!-- usado context_processors. Es accesible en todos los templates -->
+        {% with total_items=cesta|length %}
+        {% if cesta|length > 0 %}
+            Tu cesta: 
+            <a href="{% url "cesta:cesta_detalles" %}">
+            {{ total_items }} artículo{{ total_items|pluralize }},
+            ${{ cesta.calcula_precio_total }}
+            </a>
+        {% else %}
+            Tu cesta está vacía
+        {% endif %}
+        {% endwith %}
 
     </div>
 </div>
